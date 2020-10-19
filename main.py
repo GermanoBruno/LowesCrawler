@@ -33,10 +33,15 @@ def getMenu():
 		print("2. Ver dataframe dos dados coletados")
 		print("3. Remover duplicatas")
 		print("4. Sobrescrever dados do csv")
+		print("5. Sair do programa")
 		op = input("\nQual a opcao desejada? ")
 		if op == '1':
-			fetchData()
-			print("Dados coletados e csv criado")
+			print("Isso pode demorar, tem certeza que deseja continuar?")
+			if(input("y/n\n").lower() == 'y'):
+				fetchData()
+				print("Dados coletados e csv criado")
+			else:
+				print("Retornando ao menu")
 		elif op == '2':
 			df = readData()
 			print(df)
@@ -56,6 +61,7 @@ def getMenu():
 				print("Dados sobreescrevidos no csv")
 		elif op == '5':
 			print("Programa finalizado")
+			return
 		else:
 			print("Operacao invalida")
 
