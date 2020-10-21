@@ -1,0 +1,375 @@
+{
+  "adobe": {
+    "visitNum": "1",
+    "lastVisit": "First Visit",
+    "marketingCloudVisitorID": "20613762960919293583238126940073700761",
+    "prodNum": "6",
+    "visitorAPI": "VisitorAPI Present",
+    "visitorID": "3B9D044301E59C7E-3F3125273449D21F"
+  },
+  "gauge": {
+    "pageCount": "3",
+    "resolution": "1536x864",
+    "colorDepth": "24",
+    "javaEnabled": "N",
+    "cookiesEnabled": "Y",
+    "viewportWidth": "1462",
+    "viewportHeight": "382",
+    "charset": "UTF-8",
+    "referrer": "https://www.lowes.com/pl/French-door-refrigerators-Refrigerators-Appliances/4294857963",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0",
+    "language": "pt-BR",
+    "timestamp": "2020-10-20T06:19:25.371Z",
+    "timezoneOffset": "180",
+    "host": "www.lowes.com",
+    "boomerID": "baf6dca5-cc4e-403c-8193-0725470806c6",
+    "lowesDigitalId": "",
+    "kruxID": "kppidff_NtOmtI54|tymoku2zs,uosa8e9rw,tymn4ermp",
+    "respond": false,
+    "storeID": "2707",
+    "myLowesID": "",
+    "scrollDepth": "8|16|8|9813",
+    "p_visit": "2",
+    "clientVersion": "1.1.5",
+    "previousPageType": "product-list",
+    "previousSitesections": "Appliances,Refrigerators,French Door Refrigerators",
+    "previousSiteID": "desktop",
+    "botScore": null
+  },
+  "dataLayers": {
+    "current": {
+      "page": {
+        "pageInfo": {
+          "abtesting": [
+            "globalweb-header-stable",
+            "globalweb-footer-stable",
+            "ABT-3775-A"
+          ],
+          "pageName": "product-display",
+          "siteID": "desktop",
+          "destinationURL": "https://www.lowes.com/pd/Frigidaire-26-8-cu-ft-French-Door-Refrigerator-with-Ice-Maker-EasyCare-Stainless-Steel-ENERGY-STAR/1000225693",
+          "referrerURL": "https://www.lowes.com/pl/French-door-refrigerators-Refrigerators-Appliances/4294857963"
+        },
+        "category": {
+          "pageType": "product-display",
+          "platform": 1,
+          "framework": 1,
+          "siteSections": [
+            "appliances",
+            "refrigerators",
+            "french_door_refrigerators"
+          ]
+        }
+      },
+      "products": [
+        {
+          "productInfo": {
+            "productID": "1000225693",
+            "productName": "26.8-cu_ft_french_door_refrigerator_with_ice_maker_easycare_stainless_steel_energy_star",
+            "ivm": "852874-2251-LFHB2751TF",
+            "itemNumber": "852874",
+            "vendorNumber": "2251",
+            "model": "LFHB2751TF",
+            "brand": "frigidaire",
+            "sosType": false
+          },
+          "attributes": {
+            "epcItems": "spin|image|video",
+            "type": "LOCALONLY",
+            "ltlItem": false,
+            "hazmatItem": true,
+            "availability": {
+              "boss": {
+                "productStockType": "STK",
+                "availabilityStatus": "Available",
+                "isAvlSts": true,
+                "deliveryMethodId": 2,
+                "deliveryMethodName": "Store Pickup",
+                "availabileQuantity": 305,
+                "availableQuantity": 305,
+                "leadTime": 1603774800000,
+                "endLeadDays": 7,
+                "startLeadDays": 3
+              },
+              "bopuis": {
+                "availabilityStatus": "NA"
+              },
+              "parcel": {
+                "productStockType": "STK",
+                "availabilityStatus": "Not Available",
+                "isAvlSts": false,
+                "deliveryMethodId": 1,
+                "deliveryMethodName": "Parcel Shipping",
+                "availabileQuantity": 0,
+                "availableQuantity": 0
+              },
+              "pickup": {
+                "productStockType": "STK",
+                "availabilityStatus": "Available",
+                "isAvlSts": true,
+                "deliveryMethodId": 2,
+                "deliveryMethodName": "Store Pickup",
+                "availabileQuantity": 305,
+                "availableQuantity": 305,
+                "leadTime": 1603774800000,
+                "endLeadDays": 7,
+                "startLeadDays": 3
+              },
+              "truck": {
+                "productStockType": "STK",
+                "availabilityStatus": "Available",
+                "isAvlSts": true,
+                "deliveryMethodId": 3,
+                "deliveryMethodName": "Truck Delivery",
+                "availabileQuantity": 305,
+                "availableQuantity": 305,
+                "leadTime": 1603170000000,
+                "leadtimeToday": true
+              }
+            },
+            "displayPriceType": "selling",
+            "priceType": "reg",
+            "sellingPrice": 2348
+          }
+        }
+      ],
+      "user": {
+        "profile": {
+          "profileInfo": {},
+          "attributes": {
+            "storeID": "2707"
+          }
+        },
+        "status": "guest",
+        "segment": "consumer",
+        "dbid": "9a6faab6-2564-5188-ac3b-1cc58e496b9a"
+      },
+      "components": {
+        "scroll": {
+          "attributes": {
+            "pageHeight": "2523",
+            "initialViewed": "30",
+            "totalViewed": "31",
+            "scrollPercent": "0"
+          }
+        },
+        "mboxes": [
+          {
+            "componentInfo": {
+              "componentID": "productPage_bottom_record",
+              "status": true,
+              "offers": []
+            },
+            "category": {
+              "primaryCategory": "mbox"
+            }
+          }
+        ]
+      },
+      "recommendations": {
+        "offers": {
+          "lws_pdp_recommendations_abovespecs_1": {
+            "divName": "lws_pdp_recommendations_abovespecs_1",
+            "title": "COMPLETE THE SUITE",
+            "location": null,
+            "tagName": "complete_the_suite",
+            "type": "mint",
+            "products": {
+              "0": {
+                "id": "1000223753",
+                "ivm": "838377-2251-LFID2426TF"
+              },
+              "1": {
+                "id": "1000575257",
+                "ivm": "1158060-2251-FFGW2426US"
+              },
+              "2": {
+                "id": "4755000",
+                "ivm": "495553-2251-FHWC3640MS"
+              },
+              "3": {
+                "id": "50059335",
+                "ivm": "425488-2251-FFMO1611LS"
+              },
+              "4": {
+                "id": "1001005696",
+                "ivm": "1427810-2251-FGIH3047VF"
+              },
+              "5": {
+                "id": "1000833412",
+                "ivm": "1339555-2251-FGMO226NUF"
+              },
+              "6": {
+                "id": "1000812190",
+                "ivm": "1326099-2251-FFEC3025US"
+              },
+              "7": {
+                "id": "1000253863",
+                "ivm": "848349-2251-LFGF3054TF"
+              },
+              "8": {
+                "id": "3530168",
+                "ivm": "346104-2251-FHWC3655LS"
+              },
+              "9": {
+                "id": "3530174",
+                "ivm": "346110-2251-FHPC4260LS"
+              },
+              "10": {
+                "id": "1000295885",
+                "ivm": "884238-2251-LFET3026TF"
+              },
+              "11": {
+                "id": "1000822232",
+                "ivm": "1326095-2251-FGMC3066UF"
+              }
+            }
+          },
+          "lws_pdp_recommendations_belowspecs_4": {
+            "divName": "lws_pdp_recommendations_belowspecs_4",
+            "title": "RELATED ITEMS",
+            "location": null,
+            "tagName": "related_items",
+            "type": "mint",
+            "products": {
+              "0": {
+                "id": "3190917",
+                "ivm": "247027-59288-98516"
+              },
+              "1": {
+                "id": "3196993",
+                "ivm": "247028-59288-98517"
+              },
+              "2": {
+                "id": "1000549235",
+                "ivm": "1085860-2251-LFEH3054UF"
+              },
+              "3": {
+                "id": "1002260792",
+                "ivm": "1678224-2251-LFMV1846VF"
+              },
+              "4": {
+                "id": "1000812172",
+                "ivm": "1285288-2251-FGIP2468UF"
+              },
+              "5": {
+                "id": "1000968668",
+                "ivm": "1298680-2251-FGEH3047VF"
+              },
+              "6": {
+                "id": "1001000702",
+                "ivm": "1354364-2251-GCRE302LAF"
+              },
+              "7": {
+                "id": "1001000726",
+                "ivm": "1362372-2251-FGMV17WNVF"
+              },
+              "8": {
+                "id": "1001103388",
+                "ivm": "1394393-2251-FCRG305LAF"
+              },
+              "9": {
+                "id": "1000507507",
+                "ivm": "1054481-2251-FFCD2413US"
+              },
+              "10": {
+                "id": "50450250",
+                "ivm": "754652-2251-EPTWFU01"
+              },
+              "11": {
+                "id": "3266293",
+                "ivm": "40529-131-L498UL"
+              },
+              "12": {
+                "id": "4559124",
+                "ivm": "433261-56315-433261"
+              }
+            }
+          },
+          "lws_pdp_recommendations_belowspecs_5": {
+            "divName": "lws_pdp_recommendations_belowspecs_5",
+            "title": "PREVIOUSLY VIEWED",
+            "location": null,
+            "tagName": "previously_viewed",
+            "type": "mint",
+            "products": {
+              "0": {
+                "id": "1000257811",
+                "ivm": "754716-46-WRX735SDHZ"
+              },
+              "1": {
+                "id": "1002860756",
+                "ivm": "2501309-49317-URNTC2306N"
+              },
+              "2": {
+                "id": "50373900",
+                "ivm": "488377-149-RF23J9011SR"
+              }
+            }
+          },
+          "lws_pdp_recommendations_belowspecs_3": {
+            "divName": "lws_pdp_recommendations_belowspecs_3",
+            "title": "CUSTOMERS ALSO VIEWED",
+            "location": null,
+            "tagName": "customers_also_viewed",
+            "type": "mint",
+            "products": {
+              "0": {
+                "id": "1000262637",
+                "ivm": "852875-2251-FFHB2750TD"
+              },
+              "1": {
+                "id": "1000257811",
+                "ivm": "754716-46-WRX735SDHZ"
+              },
+              "2": {
+                "id": "1000092933",
+                "ivm": "714644-46-WRF555SDFZ"
+              },
+              "3": {
+                "id": "1000228559",
+                "ivm": "753010-46-WRF535SWHZ"
+              },
+              "4": {
+                "id": "1000289717",
+                "ivm": "852876-2251-LGHB2869TF"
+              },
+              "5": {
+                "id": "1000575537",
+                "ivm": "1161217-2251-LFHD2251TF"
+              },
+              "6": {
+                "id": "1000938916",
+                "ivm": "1341469-49317-LFCS27596S"
+              },
+              "7": {
+                "id": "1000240811",
+                "ivm": "852910-2251-LFHG2251TF"
+              },
+              "8": {
+                "id": "1000551617",
+                "ivm": "828917-49317-LFDS22520S"
+              },
+              "9": {
+                "id": "1002647504",
+                "ivm": "1689316-83-GFE26JYMFS"
+              },
+              "10": {
+                "id": "1002683282",
+                "ivm": "1697395-149-RF27T5241SR"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "track": {
+    "accordion": {
+      "status": "expand",
+      "name": "specifications"
+    }
+  },
+  "path": "/link/accordion",
+  "method": "post"
+}

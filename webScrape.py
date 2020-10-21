@@ -1,3 +1,5 @@
+#coding: utf-8
+
 """
 	NOTAS DE DESENVOLVIMENTO
 
@@ -33,163 +35,113 @@ from classes import *
 #driver = webdriver.Firefox(firefox_binary=binary, executable_path=r"C:\\geckodriver.exe")
 
 def openBrowser(url):
+	##########
+	# Param: an URL
+	#
+	# Returns: open webdriver on that URL
+	##########
+
+
 	# Função para abrir uma janela do navegador na url dada
 
 	# Caminhos do sistema para os binarios do webdriver e do navegador
 	binary = FirefoxBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe")
 	driver = webdriver.Firefox(firefox_binary=binary, executable_path=r"C:\\geckodriver.exe")
+	
+	# Debug Helper
 	print("Vai abrir: " + url)
+
 	driver.get(url)
+
+	# poderia retornar o soup da pagina e fechar o browser, mas assim poderia
+	# causar conflito com implementações futuras que precisem do webdriver aberto
+
 	return driver
 
-# Recebe a url do catalogo, retorna lista das urls e nome das categorias
 def listCategoryUrl(catalogUrl):
-	# Função pra pegar a url das categorias, dado a url do catalogo
-	driver = openBrowser(catalogUrl)
+	##########
+	# Param: an URL for the catalog of categories
+	#
+	# Returns: list of category names
+	# 		   list of category urls
+	##########
 
-	# grid-16 é a classe da div de cada categoria
+
+	# Nessa função, por ser a primeira que roda e só rodar uma vez,
+	# usei as ferramentas de achar elementos do próprio webdriver.
+	# Nunca tinha usado então quis testar e ver como se comportavam :)
+	
+
+	binary = FirefoxBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe")
+	driver = webdriver.Firefox(firefox_binary=binary, executable_path=r"C:\\geckodriver.exe")
+	driver.get(catalogUrl)
+	#driver = openBrowser(catalogUrl)
+
+	# A classe especificada identifica as categorias no catalogo
 	categories = driver.find_elements_by_class_name('grid-16')
 
+	# inicializa as listas que serao utilizadas
 	listCategoryName = []
 	listCategoryUrl = []
 
+	# itera em todas as categorias encontradas para achar o nome e o link
 	for category in categories:
 		categoryName = category.text
-		# buscar o link de cada categoria
+		# Buscar o link de cada categoria
 		categoryUrl = category.find_element_by_css_selector('a').get_attribute('href')
 
 		listCategoryName.append(categoryName)
 		listCategoryUrl.append(categoryUrl)
 
-	# fechar o navegador
+	# Fecha o navegador
 	driver.quit()
-	#sessionCookies = driver.get_cookies()''
+
 	return listCategoryName, listCategoryUrl
 
-# recebe o numero da pagina, retorna o numero do offset
 def setOffset(pageNum):
-
+	##########
+	# Param: the current page number
+	#
+	# Returns: the offset for the given page
+	##########
 	return pageNum*36
 
-# Recebe a url da categoria,o nome e o catalogo
-# append no catalogo os produtos novos achados
-def getCategoryProducts(categoryUrl, categoryName, catalog):
-	driver = openBrowser(str(categoryUrl))
-	soup = BeautifulSoup(str(driver.page_source), 'lxml')
-	driver.close()
-	productQtt = soup.find('div', class_='sc-1hnzoos-1 gEhtWF')
-	if(productQtt != None):
-		productQtt = productQtt.contents[0].split(' ')[0]
-	else:
-		return
-	
+def getPageProducts(pageUrl, categoryName, catalog):
+	##########
+	# 	Params: an url for the product list page
+	#			the name of the category of those products
+	#			the Catalog object of the current execution of the program
+	#
+	# 	gets all the products on a given page and add their data to
+	#	the catalog 
+	##########
 
-	page = 0
-	offset = setOffset(page)
-	pageUrl = categoryUrl
-	while(offset < int(productQtt)):
-		getPageProducts__(pageUrl, categoryName, catalog)
-		page = page+1
-		offset = setOffset(page)
-		pageUrl = pageUrl.split('?')[0] + "?offset=" + str(offset)
-
-# Recebe lista com todas as urls de categoria e retorna todos os refrigeradores (das primeira paginas)
-def getPageProducts(listCategoryUrl, categoryName):
-
-	#listProductName = []
-	refrigeratorList = Catalog()
-	for site, categoriaAtual in zip(listCategoryUrl, categoryName):
-		driver = openBrowser(str(site))
-		#driver = openBrowser(str(site) + "?offset=" + str(offset))
-
-		categoriaUsada = categoriaAtual
-
-		#driver = openBrowser(str(listCategoryUrl[0]))
-		#categoriaUsada = categoryName[0]
-
-		soup = BeautifulSoup(str(driver.page_source), 'lxml')
-		driver.close()
-		'''
-		child_element =  WebDriverWait(driver,10).until(
-	    EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[2]/section/div/div[3]/div[2]/div/div[2]/div/div/div[47]/ul/li[7]/a"))
-		)
-		link = driver.find_element_by_xpath("/html/body/div[1]/div[2]/section/div/div[3]/div[2]/div/div[2]/div/div/div[47]/ul/li[7]/a")
-		print(link)
-		'''
-		# sc-3tdioj-0 bbzAql pl-column é a classe da div de cada produto
-		productList = soup.find_all('div', class_='sc-3tdioj-0 bbzAql pl-column')
-		# sc-1b7wdu0-9 cjoVtZ é a classe do span da marca
-		brandList = soup.find_all('span', class_='sc-1b7wdu0-9 cjoVtZ') 
-		# sc-1b7wdu0-8 ePVQHM é a classe do article nome
-		nameList = soup.find_all('article', class_='sc-1b7wdu0-8 ePVQHM')
-		# tooltip-custom é a classe do span do SKU e do Model
-		skuAndModel = soup.find_all('span', class_='tooltip-custom')
-		productQtt = soup.find('div', class_='sc-1hnzoos-1 gEhtWF')
-
-		totalProductQtt = productQtt.contents[0].split(' ')[0]
-		print(totalProductQtt)
-		#input('Só isso chapa')
-		
-		skuList = skuAndModel[0::2]
-		modelList = skuAndModel[1::2]
-
-
-
-
-		'''	print('sku: ' + str(len(skuList)))
-		print('brand' + str(len(brandList)))
-		print('name' + str(len(nameList)))
-		print('model' + str(len(modelList)))
-		print('product' + str(len(productList)))
-		'''
-
-		for (product, name, sku, brand, model) in zip(productList, nameList, skuList, brandList, modelList):
-			urlFound = 'https://www.lowes.com' + product.find('a')['href']
-			nameFound =  name.contents[1] or None
-			brandFound = brand.contents[0]
-			modelFound = model.contents[-1].split('#')[-1]
-			skuFound = sku.contents[-1].split('#')[-1]
-			'''print(urlFound)
-			print(brandFound)
-			print(nameFound)
-			print(skuFound)
-			print(modelFound)
-			print('\n')'''
-			
-			newRefrigerator = Refrigerator(urlFound, brandFound, nameFound, skuFound, modelFound)
-			#passar categoria aqui
-			newRefrigerator.appendCategory(categoriaUsada)
-
-			refrigeratorList.appendToCatalog(newRefrigerator)
-			#ADICIONAR O OBJETO NA LISTA
-
-
-	return refrigeratorList
-
-# recebe uma pagina e sua categoria e coloca no catalogo os refrigeradores dela
-def getPageProducts__(pageUrl, categoryName, catalog):
 
 	driver = openBrowser(str(pageUrl))
 	soup = BeautifulSoup(str(driver.page_source), 'lxml')
 	driver.close()
 
-	# sc-3tdioj-0 bbzAql pl-column é a classe da div de cada produto
+	# A classe especificada é a identificadora da div contendo cada produto
 	productList = soup.find_all('div', class_='sc-3tdioj-0 bbzAql pl-column')
-	# sc-1b7wdu0-9 cjoVtZ é a classe do span da marca
+	# A classe especificada é a identificadora do span contendo a marca
 	brandList = soup.find_all('span', class_='sc-1b7wdu0-9 cjoVtZ') 
-	# sc-1b7wdu0-8 ePVQHM é a classe do article nome
+	# A classe especificada é a identificadora do article contendo o nome
 	nameList = soup.find_all('article', class_='sc-1b7wdu0-8 ePVQHM')
-	# tooltip-custom é a classe do span do SKU e do Model
+	# A classe especificada é a identificadora do span contendo o SKU e o Model
 	skuAndModel = soup.find_all('span', class_='tooltip-custom')
 	
+	# Separa a lista de SKU da de Modelos
 	skuList = skuAndModel[0::2]
 	modelList = skuAndModel[1::2]
 
 	for (product, name, sku, brand, model) in zip(productList, nameList, skuList, brandList, modelList):
-		if(not catalog.searchSku(sku)):
+		repeatedProduct = catalog.searchSku(sku)
+		if( repeatedProduct == None):
 			urlFound = 'https://www.lowes.com' + product.find('a')['href']
 			nameFound =  name.contents[1] or None
 			brandFound = brand.contents[0]
+			# Se certifica que pega o sku e o modelo no formato correto,
+			# visto que há inconsistência nos dados do site
 			modelFound = model.contents[-1].split('#')[-1]
 			skuFound = sku.contents[-1].split('#')[-1]
 
@@ -197,11 +149,82 @@ def getPageProducts__(pageUrl, categoryName, catalog):
 			newRefrigerator.appendCategory(categoryName)
 
 			catalog.appendToCatalog(newRefrigerator)
-			#catalog.printCatalog()
-			#input("colocou o primeiro")
+		else:
+			print("Achou uma duplicata")
+			if(categoryName not in catalog.getProductList()):
+				repeatedProduct.appendCategory(categoryName)
+				print("Adicionou a categoria nova")
+				print(repeatedProduct.showCategories())
+			else:
+				print("a categoria ja esta inclusa")
+			#input("Pode ir dormir, chapa")
 
+def getCategoryProducts(categoryUrl, categoryName, catalog):
+	##########
+	# 	Params: an URL for a category
+	#			the name for this category
+	#			the Catalog object of the current execution of the program
+	#
+	#	gets all the products on a given category and adds them
+	#	to the catalog object
+	##########
+
+	driver = openBrowser(str(categoryUrl))
+	soup = BeautifulSoup(str(driver.page_source), 'lxml')
+	driver.close()
+
+	# A classe especificada identifica o o numero de produtos na categoria
+	productQtt = soup.find('div', class_='sc-1hnzoos-1 gEhtWF')
+
+	if(productQtt != None):
+		# Separa o texto da quantidade de produtos e pega o numero
+		productQtt = int(productQtt.contents[0].split(' ')[0])
+	else:
+		# Debug Helper
+		print("Erro na leitura da pagina da categoria: (" + categoryName + ")")
+		return
+	
+	page = 0
+	offset = setOffset(page)
+	pageUrl = categoryUrl
+
+	# Tem uns sites que tem ?& na especificacao... 
+
+	if (len(categoryUrl.split('?')) == 1):
+		# se existir uma interrogacao na url, significa que existe um filtro nela
+		# portanto a adicao da pagina e feita de uma maneira diferente
+		while(offset < productQtt):
+			getPageProducts(pageUrl, categoryName, catalog)
+			page = page+1
+			offset = setOffset(page)
+			# Adiciona o offset, funcionando como um numero de pagina
+			pageUrl = pageUrl.split('?')[0] + "?offset=" + str(offset)
+	else:
+		if (len(categoryUrl.split('&')) == 1):
+			while(offset < productQtt):
+				getPageProducts(pageUrl, categoryName, catalog)
+				page = page+1
+				offset = setOffset(page)
+				# Adiciona o offset, funcionando como um numero de pagina
+				pageUrl = pageUrl.split('&')[0] + "&offset=" + str(offset)
+		else:
+			# Para o caso (estranho, mas existente) de algum filtro ser aplicado com ?&
+			while(offset < productQtt):
+				getPageProducts(pageUrl, categoryName, catalog)
+				page = page+1
+				offset = setOffset(page)
+				# Adiciona o offset, funcionando como um numero de pagina
+				if(page > 1):
+					# Se passou da primeira página, troca o offset pelo novo
+					pageUrl = '&'.join(pageUrl.split('&')[:-1]) + "&offset=" + str(offset)
+				else:
+					# Se ainda está na primeira página, adiciona o offset na url
+					pageUrl = pageUrl + "&offset=" + str(offset)
+
+# NAO IMPLEMENTADO AINDA
 def getProductData(product):
 	# Product é um Refrigerator
+
 	driver = openBrowser(product.getUrl())
 	soup = BeautifulSoup(str(driver.page_source), 'lxml')
 	driver.implicitly_wait(10)
@@ -214,6 +237,12 @@ def getProductData(product):
 
 
 #catalog = Catalog()
+#nameList, urlList = listCategoryUrl('https://www.lowes.com/c/Refrigerators-Appliances')
+
+#getCategoryProducts(urlList[6], nameList[6], catalog)
+
+#print(urlList)
+
 
 #nameList, urlList = listCategoryUrl('https://www.lowes.com/c/Refrigerators-Appliances')
 #for url, name in zip(urlList, nameList):#

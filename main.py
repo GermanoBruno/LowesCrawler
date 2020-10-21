@@ -1,3 +1,5 @@
+#coding: utf-8
+
 """
 	NOTAS DE DESENVOLVIMENTO
 
@@ -21,7 +23,7 @@ import pandas as pd
 import numpy as np
 
 from webScrape import *
-from classes import *
+#from classes import *
 
 def getMenu():
 	print("Crawler do site Lowe's")
@@ -36,8 +38,8 @@ def getMenu():
 		print("5. Sair do programa")
 		op = input("\nQual a opcao desejada? ")
 		if op == '1':
-			print("Isso pode demorar, tem certeza que deseja continuar?")
-			if(input("y/n\n").lower() == 'y'):
+			#print("Isso pode demorar, tem certeza que deseja continuar?")
+			if(input("Isso pode demorar, tem certeza que deseja continuar? (y/n)\n").lower() == 'y'):
 				fetchData()
 				print("Dados coletados e csv criado")
 			else:
@@ -66,6 +68,7 @@ def getMenu():
 			print("Operacao invalida")
 
 def rewriteData(dataframe):
+
 	dataframe.to_csv("geladeiras.csv")
 
 def fetchData():
@@ -79,7 +82,7 @@ def fetchData():
 	geladeiras = [i.toArray() for i in catalog.getProductList()]
 
 	data = np.array(geladeiras)
-	colunas = ['Brand', 'Title', 'Sku', 'Model', 'Url']
+	colunas = ['Brand', 'Title', 'Sku', 'Model', 'Url', 'Categories']
 
 	df =pd.DataFrame(data, columns=colunas)
 	df.to_csv("geladeiras.csv")
@@ -94,4 +97,10 @@ def removeDuplicates(dataframe):
 	dataframe = dataframe.drop('Unnamed: 0', axis=1)
 	return dataframe
 
-getMenu()
+#getMenu()
+
+fetchData()
+df = readData()
+removeDuplicates(df)
+rewriteData(df)
+df = readData()

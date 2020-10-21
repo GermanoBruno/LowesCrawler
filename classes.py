@@ -1,3 +1,5 @@
+#coding: utf-8
+
 class Refrigerator():
 	def __init__(self, originalUrl, brand, title, sku, model):
 			self.originalUrl = originalUrl
@@ -12,8 +14,13 @@ class Refrigerator():
 			   + self.sku + "\nModel: " + self.model + "\nUrl: " + self.originalUrl)
 		return rep
 
+	def categoriesToString(self):
+		# substituir as virgulas por ponto e virgulas para exibicao no CSV
+		rep = str(self.categories).replace(',', ';')
+		return rep
+
 	def toArray(self):
-		rep = [self.brand, self.title, self.sku, self.model, self.originalUrl]
+		rep = [self.brand, self.title, self.sku, self.model, self.originalUrl, str(self.categories)]
 		return rep
 
 	def showCategories(self):
@@ -47,7 +54,7 @@ class Catalog():
 		return self.productList
 
 	def searchSku(self, searching):
-		for sku in self.productSku:
+		for sku, product in zip(self.productSku, self.productList):
 			if(sku == searching):
-				return True
-		return False
+				return product
+		return None
