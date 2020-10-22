@@ -1,27 +1,5 @@
 #coding: utf-8
 
-"""
-	NOTAS DE DESENVOLVIMENTO
-
-	Ao que parece, só pegar o get toda vez não vai funcionar. Talvez eu tenha que ir clicando em tudo mesmo, um por um...
-	Aprender como abre link desse jeito e testar
-
-	Abrindo e fechando o webdriver funciona... mas é bem demorado
-
-	Feito: 	pegar os links das categorias de geladeiras
-			pegar os links das geladeiras individualmente
-		 	pegar os dados (nome, sku e link)
-
-	Todo: 	conseguir abrir direito elas
-			aprender a "passar página"
-			SKU tá vindo duplicado com o modelo (o modelo cai como o SKU do proximo item)
-			evitar duplicatas
-			pegar mais dados
-			passar a categoria
-			agregar categoria, caso seja duplicata
-
-"""
-
 import pandas as pd
 import numpy as np
 
