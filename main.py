@@ -8,37 +8,39 @@
 
 	Abrindo e fechando o webdriver funciona... mas é bem demorado
 
-	Feito: 	Peguei os dados principais
-			Peguei todos os catalogos
-			Exportei pra csv
-		 	
+	Feito: 	pegar os links das categorias de geladeiras
+			pegar os links das geladeiras individualmente
+		 	pegar os dados (nome, sku e link)
 
-	Todo: 	Arrumar a passada de paginas
-			Identificar duplicatas(na leitura dos dados)
-			Inserir a categoria, caso duplicata
-			Pegar os dados (extras) da pagina de produto
+	Todo: 	conseguir abrir direito elas
+			aprender a "passar página"
+			SKU tá vindo duplicado com o modelo (o modelo cai como o SKU do proximo item)
+			evitar duplicatas
+			pegar mais dados
+			passar a categoria
+			agregar categoria, caso seja duplicata
+
 """
 
 import pandas as pd
 import numpy as np
 
 from webScrape import *
-#from classes import *
 
 def getMenu():
 	print("Crawler do site Lowe's")
 	df = None
 	op = 0
-	while not(op == 5):
+	while (op != 6):
 		print("Operaçoes: ")
-		print("1. Coletar os dados")
+		print("1. Coletar os dados gerais")
 		print("2. Ver dataframe dos dados coletados")
 		print("3. Remover duplicatas")
 		print("4. Sobrescrever dados do csv")
-		print("5. Sair do programa")
+		print("5. Coletar dados especificos dos produtos")
+		print("6. Sair do programa")
 		op = input("\nQual a opcao desejada? ")
 		if op == '1':
-			#print("Isso pode demorar, tem certeza que deseja continuar?")
 			if(input("Isso pode demorar, tem certeza que deseja continuar? (y/n)\n").lower() == 'y'):
 				fetchData()
 				print("Dados coletados e csv criado")
@@ -62,8 +64,14 @@ def getMenu():
 				rewriteData(df)
 				print("Dados sobreescrevidos no csv")
 		elif op == '5':
+			if(df.empty):
+				print("Dataframe ainda não disponivel")
+				print("Leia os dados primeiro")
+			else:
+				df = fetchProductData(df)
+		elif op == '6':
 			print("Programa finalizado")
-			return
+			#return
 		else:
 			print("Operacao invalida")
 
@@ -78,8 +86,7 @@ def fetchData():
 	for url, name in zip(urlList, nameList):
 		getCategoryProducts(url, name, catalog)
 
-	#geladeiras = getPageProducts(urlList, nameList)
-	geladeiras = [i.toArray() for i in catalog.getProductList()]
+	geladeiras = [i.toArray() for i in productList]
 
 	data = np.array(geladeiras)
 	colunas = ['Brand', 'Title', 'Sku', 'Model', 'Url', 'Categories']
@@ -89,18 +96,38 @@ def fetchData():
 	return df
 
 def readData():
-	data = pd.read_csv("geladeiras.csv")
+	data = pd.read_csv("geladeirasTotal.csv")
 	return data
+
+
+def fetchProductData(dataframe):
+	specsColumn = []
+	i = 0
+	print('tamanho total:', len(dataframe))
+	for productUrl in dataframe['Url']:
+		i= i+1
+		print('item atual', i)
+		spec = getProductData(productUrl)
+		specsColumn.append(spec)
+	if(len(dataframe) == len(specsColumn)):
+		dataframe['Specifications'] = specsColumn
+	else:
+		print('Specs não identificados')
+	return dataframe
+
+
 
 def removeDuplicates(dataframe):
 	dataframe = dataframe.drop_duplicates('Sku', ignore_index=True)
 	dataframe = dataframe.drop('Unnamed: 0', axis=1)
 	return dataframe
 
-#getMenu()
+getMenu()
 
-fetchData()
-df = readData()
-removeDuplicates(df)
-rewriteData(df)
-df = readData()
+# Caminho esperado
+#fetchData()
+#df = readData()
+#df =removeDuplicates(df)
+#df = fetchProductData(df)
+#rewriteData(df)
+#df = readData()
